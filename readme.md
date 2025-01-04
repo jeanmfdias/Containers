@@ -1,17 +1,17 @@
-# containers
+# Containers
 
-Projeto para base de containers Docker, para agilizar um ambiente de desenvolvimento.
+Project to containers sample for Docker, to agile a development environment.
 
 - Jenkins
 - MySQL 5.7
 - MySQL 8.0
 - NodeJS
 - PHP 8.2
-- PostgreSQL
+- PostgreSQL 17
 - Redis
 
-# Para executar
+# To run
 
 ```sh startup.sh --mysql 57```
 
-Sobe o container do MySQL 5.7
+MySQL 5.7 container up
