@@ -18,6 +18,12 @@ then
     cd ./mysql8
     docker compose up -d
     echo "MySQL 8 Running"
+elif [ "$param1" = "--postgres" ]
+then
+    cd ./postgresql
+    docker compose up -d
+    echo "PostgreSQL Running"
+    cd ..
 else
     echo "No container specified"
 fi
