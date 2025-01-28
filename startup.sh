@@ -5,9 +5,6 @@ echo "Run project containers"
 param1=$1
 param2=$2
 
-echo $param1
-echo $param2
-
 if [ "$param1" = "--mysql" -a "$param2" = "5.7" ] 
 then
     cd ./mysql
@@ -21,8 +18,14 @@ then
 elif [ "$param1" = "--postgres" ]
 then
     cd ./postgresql
-    docker compose up -d
-    echo "PostgreSQL Running"
+    if [ "$param2" = "stop" ]
+    then
+        docker compose down
+        echo "PostgreSQL Stopped"
+    else
+        docker compose up -d
+        echo "PostgreSQL Running"
+    fi
     cd ..
 else
     echo "No container specified"
