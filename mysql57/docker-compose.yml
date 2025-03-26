@@ -10,7 +10,7 @@ services:
     ports:
       - 3357:3306
     volumes:
-      - ./data57:/var/lib/mysql
+      - ./data:/var/lib/mysql
       - ./configs/db57.cnf:/etc/mysql/conf.d/db57.cnf
     environment:
       - MYSQL_ROOT_PASSWORD=root
