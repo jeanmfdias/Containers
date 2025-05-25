@@ -4,8 +4,12 @@ services:
   redis:
     container_name: redis-containers
     image: redis:latest
-    command: redis-server --requirepass Redis2022
+    command: redis-server --requirepass secret
     ports:
       - 6379:6379
     volumes:
-      - ./data:/data
+      - data_redis:/data
+
+volumes:
+  data_redis:
+    driver: local
