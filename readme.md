@@ -9,9 +9,15 @@ Project to containers sample for Docker, to agile a development environment.
 - PHP 8.2
 - PostgreSQL 17
 - Redis
+- RabbitMQ
 
-# To run
+# To start the containers
 
-```sh startup.sh --mysql 57```
+MySQL 5.7
+``sh startup.sh --mysql 57``
 
-MySQL 5.7 container up
+PostegreSQL
+``sh startup.sh --postgres``
+
+MySQL 8
+``sh startup.sh --mysql 8``
