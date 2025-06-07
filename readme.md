@@ -14,10 +14,18 @@ Project to containers sample for Docker, to agile a development environment.
 # To start the containers
 
 MySQL 5.7
-``sh startup.sh --mysql 57``
+``./containers --mysql 57``
 
 PostegreSQL
-``sh startup.sh --postgres``
+``./containers --postgres``
 
 MySQL 8
-``sh startup.sh --mysql 8``
+``./containers --mysql 8``
+
+Redis
+``./containers --redis``
+
+# To stop the containers
+
+Redis by example
+``./containers --redis stop``
