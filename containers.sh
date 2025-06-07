@@ -27,6 +27,18 @@ then
         echo "PostgreSQL Running"
     fi
     cd ..
+elif [ "$param1" = "--redis" ]
+then
+    cd ./redis
+    if [ "$param2" = "stop" ]
+    then
+        docker compose down
+        echo "Redis Stopped"
+    else
+        docker compose up -d
+        echo "Redis Running"
+    fi
+    cd ..
 else
     echo "No container specified"
 fi
