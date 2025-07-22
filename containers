@@ -39,6 +39,29 @@ then
         echo "Redis Running"
     fi
     cd ..
+elif [ "$param1" = "--nginx" ]
+then
+    cd ./nginx
+    if [ "$param2" = "stop" ]
+    then
+        docker compose down
+        echo "Nginx Stopped"
+    else
+        docker compose up -d
+        echo "Nginx Running"
+    fi
+    cd ..
+elif [ "$param1" = "--all" ]
+then
+    ./run.sh --mysql 5.7
+    ./run.sh --postgres
+    ./run.sh --redis
+    ./run.sh --nginx
+elif [ "$param1" = "--nginx" ]
+then
+    cd ./nginx
+    docker compose up -d
+    echo "Nginx Running"
 else
     echo "No container specified"
 fi

@@ -1,0 +1,7 @@
+services:
+  webserver:
+    image: nginx:latest
+    container_name: containers_nginx
+    ports:
+      - "80:80" # HTTP port
+      - "443:443" # HTTPS port
