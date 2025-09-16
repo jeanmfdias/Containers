@@ -1,0 +1,5 @@
+services:
+  kafka-container:
+    image: apache/kafka:latest
+    ports:
+      - 9092:9092
