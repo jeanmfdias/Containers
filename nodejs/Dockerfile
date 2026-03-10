@@ -1,13 +1,10 @@
-FROM nginx:latest
+FROM nginx:1.27
 
-RUN apt-get update && apt-get upgrade -y
-
-RUN apt-get install -y curl \
-	git
-
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
-	apt-get install -y nodejs
-
-RUN npm install -g yarn
+RUN apt-get update && apt-get upgrade -y && \
+	apt-get install -y curl git && \
+	curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+	apt-get install -y nodejs && \
+	npm install -g yarn && \
+	rm -rf /var/lib/apt/lists/*
 
 EXPOSE 3000
