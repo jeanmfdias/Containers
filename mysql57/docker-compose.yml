@@ -1,14 +1,13 @@
-version: '3'
-
 services:
   db57:
     container_name: mysql57-containers
     image: mysql57-containers
+    platform: linux/amd64
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - 3357:3306
+      - "3357:3306"
     volumes:
       - mysql57_data:/var/lib/mysql
       - ./configs/db57.cnf:/etc/mysql/conf.d/db57.cnf
@@ -16,7 +15,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=secret
-    working_dir: /var/lib/mysql
+    restart: unless-stopped
 
 volumes:
   mysql57_data:

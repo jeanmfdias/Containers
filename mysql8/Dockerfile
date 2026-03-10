@@ -1,5 +1,7 @@
-FROM mysql:8.0-debian
+FROM mysql:8.4
 
-RUN apt-get update && apt-get install -y pv
+RUN microdnf install -y oracle-epel-release-el9 \
+    && microdnf install -y pv \
+    && microdnf clean all
 
 EXPOSE 3306
