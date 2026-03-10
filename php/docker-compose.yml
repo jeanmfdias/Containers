@@ -1,24 +1,24 @@
-version: '3.9'
-
 services:
   app:
-    container_name: php82-container
-    image: php82-container
-    build: 
+    container_name: php84-container
+    image: php84-container
+    build:
       context: .
       dockerfile: ./Dockerfile
-    working_dir: /app
-    ports:
-      - 9000:9000
+    working_dir: /var/www
     volumes:
-      - ./www:/app
+      - ./www:/var/www
+    restart: unless-stopped
   webserver:
-    container_name: php82-nginx-container
-    image: nginx:latest
+    container_name: php84-nginx-container
+    image: nginx:1.27
     volumes:
       - ./www:/var/www
       - ./configs/website.conf:/etc/nginx/conf.d/default.conf
       - ./logs:/var/log/nginx
     ports:
-      - 8000:80
+      - "8000:80"
     working_dir: /var/www
+    depends_on:
+      - app
+    restart: unless-stopped
