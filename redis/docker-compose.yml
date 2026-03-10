@@ -1,7 +1,7 @@
 services:
   redis:
     container_name: redis-containers
-    image: redis:latest
+    image: redis:7
     restart: always
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
     ports:
