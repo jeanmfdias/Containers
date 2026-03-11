@@ -5,63 +5,62 @@ echo "Run project containers"
 param1=$1
 param2=$2
 
-if [ "$param1" = "--mysql" -a "$param2" = "5.7" ] 
-then
-    cd ./mysql
-    docker compose up -d
-    echo "MySQL 5.7 Running"
-elif [ "$param1" = "--mysql" -a "$param2" = "8" ]
-then
-    cd ./mysql8
-    docker compose up -d
-    echo "MySQL 8 Running"
-elif [ "$param1" = "--postgres" ]
-then
-    cd ./postgresql
-    if [ "$param2" = "stop" ]
-    then
+run_container() {
+    local dir=$1
+    local name=$2
+    local action=${param2:-up}
+
+    cd "./$dir" || exit 1
+    if [ "$action" = "stop" ]; then
         docker compose down
-        echo "PostgreSQL Stopped"
+        echo "$name Stopped"
     else
         docker compose up -d
-        echo "PostgreSQL Running"
+        echo "$name Running"
     fi
-    cd ..
-elif [ "$param1" = "--redis" ]
-then
-    cd ./redis
-    if [ "$param2" = "stop" ]
-    then
-        docker compose down
-        echo "Redis Stopped"
-    else
-        docker compose up -d
-        echo "Redis Running"
-    fi
-    cd ..
-elif [ "$param1" = "--nginx" ]
-then
-    cd ./nginx
-    if [ "$param2" = "stop" ]
-    then
-        docker compose down
-        echo "Nginx Stopped"
-    else
-        docker compose up -d
-        echo "Nginx Running"
-    fi
-    cd ..
-elif [ "$param1" = "--all" ]
-then
-    ./run.sh --mysql 5.7
-    ./run.sh --postgres
-    ./run.sh --redis
-    ./run.sh --nginx
-elif [ "$param1" = "--nginx" ]
-then
-    cd ./nginx
-    docker compose up -d
-    echo "Nginx Running"
+    cd - > /dev/null
+}
+
+if [ "$param1" = "--mysql57" ]; then
+    run_container mysql57 "MySQL 5.7"
+elif [ "$param1" = "--mysql84" ] ; then
+    run_container mysql8 "MySQL 8"
+elif [ "$param1" = "--postgres" ]; then
+    run_container postgresql "PostgreSQL"
+elif [ "$param1" = "--redis" ]; then
+    run_container redis "Redis"
+elif [ "$param1" = "--nginx" ]; then
+    run_container nginx "Nginx"
+elif [ "$param1" = "--jenkins" ]; then
+    run_container jenkins "Jenkins"
+elif [ "$param1" = "--kafka" ]; then
+    run_container kafka "Kafka"
+elif [ "$param1" = "--mailhog" ]; then
+    run_container mailhog "Mailhog"
+elif [ "$param1" = "--rabbitmq" ]; then
+    run_container rabbitmq "RabbitMQ"
+elif [ "$param1" = "--php" ]; then
+    run_container php "PHP"
+elif [ "$param1" = "--oracle" ]; then
+    run_container oracle-xe "Oracle XE"
+elif [ "$param1" = "--nodejs" ]; then
+    run_container nodejs "NodeJS"
+elif [ "$param1" = "--all" ]; then
+    ./containers --mysql57
+    ./containers --mysql84
+    ./containers --postgres
+    ./containers --redis
+    ./containers --nginx
+    ./containers --jenkins
+    ./containers --kafka
+    ./containers --mailhog
+    ./containers --rabbitmq
+    ./containers --php
+    ./containers --oracle
+    ./containers --nodejs
 else
-    echo "No container specified"
+    echo "Usage: ./containers [--mysql57] [--mysql84] [--postgres] [--redis] [--nginx] [--jenkins]"
+    echo "                    [--kafka] [--mailhog] [--rabbitmq] [--php] [--oracle] [--nodejs]"
+    echo "                    [--all]"
+    echo "Append 'stop' to stop a container. Example: ./containers --redis stop"
 fi
