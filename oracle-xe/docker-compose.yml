@@ -1,9 +1,12 @@
 services:
-  container_name: container-oracle
-  image: gvenzl/oracle-xe
-  ports:
-    - 1521:1521
-  volumes:
-    - ./data:/opt/oracle/oradata
-  environment:
-    ORACLE_PASSWORD=root
+  oracle:
+    container_name: container-oracle
+    image: gvenzl/oracle-xe:21-slim
+    ports:
+      - "1521:1521"
+    volumes:
+      - ./data:/opt/oracle/oradata
+    environment:
+      ORACLE_USER: system
+      ORACLE_PASSWORD: root
+    restart: unless-stopped
